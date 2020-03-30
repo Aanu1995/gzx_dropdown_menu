@@ -81,10 +81,13 @@ class _GZXDropDownHeaderState extends State<GZXDropDownHeader>
     _screenHeight = mediaQuery.size.height;
     _menuCount = widget.items.length;
 
-    var gridView = Row(
-      children: widget.items.map<Widget>((item) {
-        return _menu(item);
-      }).toList(),
+    var gridView = Container(
+      height: widget.height,
+      child: Row(
+        children: widget.items.map<Widget>((item) {
+          return _menu(item);
+        }).toList(),
+      ),
     );
 
     return Container(
