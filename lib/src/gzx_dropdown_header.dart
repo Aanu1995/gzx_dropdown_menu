@@ -45,7 +45,8 @@ class GZXDropDownHeader extends StatefulWidget {
   _GZXDropDownHeaderState createState() => _GZXDropDownHeaderState();
 }
 
-class _GZXDropDownHeaderState extends State<GZXDropDownHeader> with SingleTickerProviderStateMixin {
+class _GZXDropDownHeaderState extends State<GZXDropDownHeader>
+    with SingleTickerProviderStateMixin {
   bool _isShowDropDownItemWidget = false;
   double _screenWidth;
   double _screenHeight;
@@ -71,7 +72,8 @@ class _GZXDropDownHeaderState extends State<GZXDropDownHeader> with SingleTicker
   Widget build(BuildContext context) {
 //    print('_GZXDropDownHeaderState.build');
 
-    widget.dropDownStyle ??= TextStyle(color: Theme.of(context).primaryColor, fontSize: 13);
+    widget.dropDownStyle ??=
+        TextStyle(color: Theme.of(context).primaryColor, fontSize: 13);
     widget.iconDropDownColor ??= Theme.of(context).primaryColor;
 
     MediaQueryData mediaQuery = MediaQuery.of(context);
@@ -79,9 +81,7 @@ class _GZXDropDownHeaderState extends State<GZXDropDownHeader> with SingleTicker
     _screenHeight = mediaQuery.size.height;
     _menuCount = widget.items.length;
 
-    var gridView = GridView.count(
-      crossAxisCount: _menuCount,
-      childAspectRatio: (_screenWidth / _menuCount) / widget.height,
+    var gridView = Row(
       children: widget.items.map<Widget>((item) {
         return _menu(item);
       }).toList(),
@@ -92,7 +92,8 @@ class _GZXDropDownHeaderState extends State<GZXDropDownHeader> with SingleTicker
       height: widget.height,
 //      padding: EdgeInsets.only(top: 1, bottom: 1),
       decoration: BoxDecoration(
-        border: Border.all(color: widget.borderColor, width: widget.borderWidth),
+        border:
+            Border.all(color: widget.borderColor, width: widget.borderWidth),
       ),
       child: gridView,
     );
@@ -109,11 +110,14 @@ class _GZXDropDownHeaderState extends State<GZXDropDownHeader> with SingleTicker
 
     return GestureDetector(
       onTap: () {
-        final RenderBox overlay = widget.stackKey.currentContext.findRenderObject();
+        final RenderBox overlay =
+            widget.stackKey.currentContext.findRenderObject();
 
-        final RenderBox dropDownItemRenderBox = _keyDropDownHearder.currentContext.findRenderObject();
+        final RenderBox dropDownItemRenderBox =
+            _keyDropDownHearder.currentContext.findRenderObject();
 
-        var position = dropDownItemRenderBox.localToGlobal(Offset.zero, ancestor: overlay);
+        var position =
+            dropDownItemRenderBox.localToGlobal(Offset.zero, ancestor: overlay);
 //        print("POSITION : $position ");
         var size = dropDownItemRenderBox.size;
 //        print("SIZE : $size");
@@ -144,13 +148,17 @@ class _GZXDropDownHeaderState extends State<GZXDropDownHeader> with SingleTicker
                       item.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: _isShowDropDownItemWidget ? widget.dropDownStyle : widget.style,
+                      style: _isShowDropDownItemWidget
+                          ? widget.dropDownStyle
+                          : widget.style,
                     )),
                     Icon(
                       !_isShowDropDownItemWidget
                           ? item.iconData ?? Icons.arrow_drop_down
                           : item.iconData ?? Icons.arrow_drop_up,
-                      color: _isShowDropDownItemWidget ? widget.iconDropDownColor : widget.iconColor,
+                      color: _isShowDropDownItemWidget
+                          ? widget.iconDropDownColor
+                          : widget.iconColor,
                       size: item.iconSize ?? widget.iconSize,
                     ),
                   ],
@@ -160,8 +168,10 @@ class _GZXDropDownHeaderState extends State<GZXDropDownHeader> with SingleTicker
                   ? Container()
                   : Container(
                       height: widget.dividerHeight,
-                      decoration:
-                          BoxDecoration(border: Border(right: BorderSide(color: widget.dividerColor, width: 1))),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              right: BorderSide(
+                                  color: widget.dividerColor, width: 1))),
                     )
             ],
           )),
